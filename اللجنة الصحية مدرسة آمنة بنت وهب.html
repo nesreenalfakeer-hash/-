@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المجلة الصحية - مدرسة آمنة بنت وهب الأساسية</title>
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --accent: #f59e0b;
+            --secondary: #0284c7;
+            --bg-gradient: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+            --text-color: #1f2937;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .magazine-container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 2px solid #d1fae5;
+        }
+        .page {
+            display: none;
+            padding: 40px;
+            min-height: 500px;
+            box-sizing: border-box;
+        }
+        .page.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        h1, h2 { color: var(--primary); }
+        h2 { border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; margin-top: 0; }
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 26px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(5, 150, 105, 0.2);
+        }
+        .btn:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
+        .nav-controls { display: flex; gap: 15px; }
+        
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        input[type="text"]:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        .quiz-option {
+            display: block;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .quiz-option:hover { background: #e0f2fe; border-color: var(--secondary); }
+        
+        /* غلاف المجلة */
+        .cover {
+            text-align: center;
+            background: linear-gradient(135deg, #065f46, #059669, #0d9488);
+            color: white;
+            padding: 60px 20px;
+        }
+        .cover h1 { color: #ffffff; font-size: 2.6em; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        .cover h2 { color: #a7f3d0; font-size: 1.6em; margin-bottom: 25px; border: none; }
+        .school-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 1.15em;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        .credits-box {
+            margin-top: 40px;
+            font-size: 1em;
+            line-height: 1.8;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .info-card {
+            background: #f0fdf4;
+            padding: 15px;
+            border-radius: 8px;
+            border-right: 5px solid var(--primary);
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <div class="magazine-container">
+        
+        <!-- الصفحة 1: الغلاف الرسمي -->
+        <div class="page active cover" id="page-1">
+            <div class="school-badge">🏫 مدرسة آمنة بنت وهب الأساسية</div>
+            <h1>المجلة الصحية التفاعلية</h1>
+            <h2>"صحتنا سر سعادتنا وحيويتنا"</h2>
+            <button class="btn" style="background-color: #ffffff; color: #065f46; font-size: 1.1em;" onclick="changePage(2)">✨ افتح المجلة وابدأ التصفح</button>
+            
+            <div class="credits-box">
+                <p style="margin: 5px 0;"><strong>إعداد معلمات اللجنة الصحية:</strong> نسرين الفقير & هناء المسيعدين</p>
+                <p style="margin: 5px 0;"><strong>إشراف مديرة المدرسة:</strong> بثينة الرفوع</p>
+            </div>
+        </div>
+
+        <!-- الصفحة 2: الافتتاحية -->
+        <div class="page" id="page-2">
+            <h2>🌟 كلمة اللجنة الصحية</h2>
+            <p>يسعدنا في اللجنة الصحية بمدرسة آمنة بنت وهب الأساسية أن نضع بين أيديكم هذا الإصدار التفاعلي، حرصاً منا على غرس العادات السليمة وبناء جيل صحي، واعي، ونشيط قادر على الإنجاز والتميز.</p>
+            <div class="info-card">
+                💡 <strong>هدفنا الأساسي:</strong> تحويل المفاهيم الصحية إلى ممارسات يومية ممتعة وسهلة التطبيق داخل المدرسة والمنزل.
+            </div>
+        </div>
+
+        <!-- الصفحة 3: ركن الغذاء الصحي المتوازن -->
+        <div class="page" id="page-3">
+            <h2>🍏 ركن الغذاء الصحي المتوازن</h2>
+            <p>الغذاء السليم هو الوقود الحقيقي للجسم والعقل. إليك أهم ركائز الطبق الصحي اليومي:</p>
+            <div class="grid-2">
+                <div style="background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <strong>🥗 الخضار والفواكه:</strong> مصدر أساسي للفيتامينات ومضادات الأكسدة التي تقوي المناعة.
+                </div>
+                <div style="background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <strong>🌾 الحبوب الكاملة:</strong> مثل الخبز الأسمر والشوفان، تمد الجسم بالطاقة المستدامة والتركيز.
+                </div>
+            </div>
+            <div class="info-card" style="border-right-color: #f59e0b; background: #fffbeb;">
+                ⚠️ <strong>تنبيه هام:</strong> ابتعدي قدر الإمكان عن الوجبات السريعة والمشروبات الغازية التي تسبب الخمول وتضعف التركيز.
+            </div>
+        </div>
+
+        <!-- الصفحة 4: زاوية الرياضة والحركة -->
+        <div class="page" id="page-4">
+            <h2>⚽ الرياضة أسلوب حياة</h2>
+            <p>الحركة لا تفيد الجسد فحسب، بل تنشط الدورة الدموية وتحسن الحالة المزاجية والنفسية:</p>
+            <ul>
+                <li><strong>التمارين الصباحية:</strong> 5 دقائق من الإطالة والحركة الخفيفة تنشط العقل قبل البدء بالحصص.</li>
+                <li><strong>المشي السريع:</strong> لمدة 20 دقيقة يومياً يقي من الخمول ويحافظ على اللياقة البدنية.</li>
+                <li><strong>الألعاب الجماعية:</strong> تعزز روح التعاون والمرح والنشاط البدني الفعّال.</li>
+            </ul>
+        </div>
+
+        <!-- الصفحة 5: اختبر معلوماتك الصحية -->
+        <div class="page" id="page-5">
+            <h2>🧠 اختبر معلوماتك الصحية</h2>
+            <div id="quiz-box">
+                <p id="quiz-question" style="font-weight: bold; color: var(--secondary); font-size: 1.1em;"></p>
+                <div id="quiz-options-container"></div>
+                <p id="quizResult" style="font-weight: bold; margin-top: 15px; padding: 10px; border-radius: 6px;"></p>
+            </div>
+        </div>
+
+        <!-- الصفحة 6: العيادة التفاعلية -->
+        <div class="page" id="page-6">
+            <h2>🩺 العيادة التفاعلية</h2>
+            <p>هل لديك استفسار صحي أو غذائي؟ اكتبيه هنا وسنقوم بالرد عليه في الإصدار القادم:</p>
+            <input type="text" id="userName" placeholder="اسمك الكريم / الصف الدراسي">
+            <textarea id="userQuestion" rows="3" placeholder="اكتب سؤالك الصحي هنا..."></textarea>
+            <button class="btn" onclick="submitQuestion()">إرسال السؤال</button>
+            <p id="msgResponse" style="color: var(--primary); font-weight: bold; margin-top: 10px;"></p>
+        </div>
+
+        <!-- الصفحة 7: خاتمة وتعزيز (النهاية) -->
+        <div class="page" id="page-7" style="text-align: center;">
+            <h2>🏆 شكراً لتفوقك واهتمامك!</h2>
+            <div style="background: #f0fdf4; padding: 25px; border-radius: 12px; border: 2px dashed var(--primary); margin: 20px 0;">
+                <p style="font-size: 1.2em; color: var(--primary-dark); font-weight: bold;">
+                    "العقل السليم في الجسم السليم"
+                </p>
+                <p style="line-height: 1.8;">
+                    نثمن زيارتك وتصفحك لهذه المجلة. نأمل أن تكوني قد استمتعتِ واستفدتِ من المعلومات المقدمة. تذكري دائماً أن التغيير يبدأ بخطوة صغيرة نحو حياة أصح وأجمل!
+                </p>
+                <p style="margin-top: 25px; font-weight: bold; color: var(--secondary); font-size: 1.1em;">
+                    اللجنة الصحية - مدرسة آمنة بنت وهب الأساسية 🌸
+                </p>
+            </div>
+            <button class="btn" onclick="changePage(1)">العودة إلى الغلاف</button>
+        </div>
+
+    </div>
+
+    <!-- أزرار التنقل بين الصفحات -->
+    <div class="nav-controls">
+        <button class="btn" id="prevBtn" onclick="prevPage()" style="display:none; background-color: #475569;">الصفحة السابقة</button>
+        <button class="btn" id="nextBtn" onclick="nextPage()">الصفحة التالية</button>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const totalPages = 7;
+
+        const quizData = [
+            {
+                q: "1. ما هو المشروب الأساسي الذي يحتاجه الجسم بكميات كافية طوال اليوم؟",
+                options: [
+                    { text: "أ) المشروبات الغازية المحلاة", correct: false },
+                    { text: "ب) الماء الصافي والنقي", correct: true },
+                    { text: "ج) عصائر المحلات الملونة", correct: false }
+                ]
+            },
+            {
+                q: "2. كم مدة النشاط البدني أو المشي الخفيف المُوصى بها يومياً؟",
+                options: [
+                    { text: "أ) 20 دقيقة تقريباً", correct: true },
+                    { text: "ب) 5 ساعات متواصلة", correct: false },
+                    { text: "ج) لا داعي للحركة نهائياً", correct: false }
+                ]
+            },
+            {
+                q: "3. أي من هذه الأغذية يُعد مفيداً لتعزيز التركيز والمناعة؟",
+                options: [
+                    { text: "أ) الشيبس والحلويات الملونة", correct: false },
+                    { text: "ب) الفواكه الطازجة والخضار", correct: true },
+                    { text: "ج) المأكولات الدسمة الثقيلة", correct: false }
+                ]
+            }
+        ];
+        let currentQuizIndex = 0;
+
+        function loadQuiz() {
+            let currentQ = quizData[currentQuizIndex];
+            document.getElementById('quiz-question').innerText = currentQ.q;
+            let optionsContainer = document.getElementById('quiz-options-container');
+            optionsContainer.innerHTML = "";
+            document.getElementById('quizResult').innerText = "";
+
+            currentQ.options.forEach((opt) => {
+                let div = document.createElement('div');
+                div.className = 'quiz-option';
+                div.innerText = opt.text;
+                div.onclick = function() { checkAnswer(opt.correct); };
+                optionsContainer.appendChild(div);
+            });
+        }
+
+        function showPage(pageNo) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + pageNo).classList.add('active');
+            document.getElementById('prevBtn').style.display = (pageNo > 1) ? 'block' : 'none';
+            document.getElementById('nextBtn').style.display = (pageNo < totalPages) ? 'block' : 'none';
+
+            if(pageNo === 5) {
+                loadQuiz();
+            }
+        }
+
+        function nextPage() {
+            if (currentPage < totalPages) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        }
+
+        function changePage(pageNo) {
+            currentPage = pageNo;
+            showPage(currentPage);
+        }
+
+        function submitQuestion() {
+            let q = document.getElementById('userQuestion').value;
+            if(q.trim() !== "") {
+                document.getElementById('msgResponse').innerText = "تم إرسال سؤالك إلى اللجنة الصحية بنجاح! شكراً لمشاركتك الفعالة.";
+                document.getElementById('userQuestion').value = "";
+                document.getElementById('userName').value = "";
+            } else {
+                alert("الرجاء كتابة السؤال أولاً.");
+            }
+        }
+
+        function checkAnswer(isCorrect) {
+            let res = document.getElementById('quizResult');
+            if(isCorrect) {
+                res.style.color = "#059669";
+                res.style.background = "#ecfdf5";
+                res.innerText = "🎉 إجابة صحيحة وممتازة! أحسنتِ الاختيار.";
+                
+                setTimeout(() => {
+                    currentQuizIndex++;
+                    if(currentQuizIndex < quizData.length) {
+                        loadQuiz();
+                    } else {
+                        document.getElementById('quiz-question').innerText = "🏆 ما شاء الله! لقد أتممتِ جميع الأسئلة بنجاح واستحقاق!";
+                        document.getElementById('quiz-options-container').innerHTML = "<p style='color:var(--primary); font-weight:bold;'>أنتِ بطلة صحية مميزة!</p>";
+                        res.innerText = "";
+                    }
+                }, 1500);
+
+            } else {
+                res.style.color = "#dc2626";
+                res.style.background = "#fef2f2";
+                res.innerText = "❌ إجابة غير دقيقة، حاولي مرة أخرى في الخيارات المتاحة.";
+            }
+        }
+    </script>
+
+</body>
+</html>
